@@ -9,9 +9,144 @@
     <meta name="theme-color" content="#F7FAF6">
 
     <link rel="stylesheet" href="./css/style.css">
+
+    <!-- TOMORROW PROFESSIONAL PAGE LOADER -->
+    <style>
+        #tomorrow-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            display: grid;
+            place-items: center;
+            background: #F7FAF6;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 650ms ease, visibility 650ms ease;
+        }
+
+        #tomorrow-loader.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .tomorrow-loader-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .tomorrow-loader-mark {
+            position: relative;
+            display: grid;
+            place-items: center;
+            width: 76px;
+            height: 76px;
+            border: 1px solid #DCE6DD;
+            border-radius: 24px;
+            background: #FFFFFF;
+            box-shadow: 0 12px 35px rgba(24, 59, 50, 0.08);
+            color: #397B62;
+            font-family: "Manrope", sans-serif;
+            font-size: 38px;
+            font-weight: 800;
+            animation: tomorrow-loader-breathe 1.6s ease-in-out infinite;
+        }
+
+        .tomorrow-loader-mark::after {
+            content: "";
+            position: absolute;
+            inset: -6px;
+            border: 2px solid transparent;
+            border-top-color: #397B62;
+            border-right-color: #397B62;
+            border-radius: 29px;
+            animation: tomorrow-loader-spin 1.15s linear infinite;
+        }
+
+        .tomorrow-loader-name {
+            margin: 0;
+            color: #183B32;
+            font-family: "Manrope", sans-serif;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -0.6px;
+        }
+
+        .tomorrow-loader-name span {
+            color: #397B62;
+        }
+
+        .tomorrow-loader-tagline {
+            margin: -15px 0 0;
+            color: #718078;
+            font-family: "DM Sans", sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .tomorrow-loader-track {
+            width: 145px;
+            height: 3px;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #DCE6DD;
+        }
+
+        .tomorrow-loader-progress {
+            width: 42%;
+            height: 100%;
+            border-radius: inherit;
+            background: #397B62;
+            animation: tomorrow-loader-progress 1.15s ease-in-out infinite;
+        }
+
+        @keyframes tomorrow-loader-spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes tomorrow-loader-breathe {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-4px) scale(1.035); }
+        }
+
+        @keyframes tomorrow-loader-progress {
+            0% { transform: translateX(-115%); }
+            100% { transform: translateX(250%); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #tomorrow-loader,
+            .tomorrow-loader-mark,
+            .tomorrow-loader-mark::after,
+            .tomorrow-loader-progress {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+
 </head>
 
 <body id="home">
+
+<!-- TOMORROW PAGE LOADER -->
+<div id="tomorrow-loader" role="status" aria-live="polite" aria-label="Loading Tomorrow">
+    <div class="tomorrow-loader-inner">
+        <div class="tomorrow-loader-mark" aria-hidden="true">T</div>
+        <p class="tomorrow-loader-name">Tomorrow<span>.</span></p>
+        <p class="tomorrow-loader-tagline">Stay Healthy. Be Healthy.</p>
+        <div class="tomorrow-loader-track" aria-hidden="true">
+            <div class="tomorrow-loader-progress"></div>
+        </div>
+    </div>
+</div>
+
 
 <header class="site-header" id="site-header">
     <nav class="navbar container" aria-label="Main navigation">
@@ -603,7 +738,7 @@
                         Annual plan: ₹1,129
                     </p>
 
-            
+
                 </article>
 
 
@@ -637,7 +772,7 @@
                         Annual plan: ₹3,420
                     </p>
 
-         
+
 
                 </article>
 
@@ -673,7 +808,7 @@
                         Annual plan: ₹2,280 per person
                     </p>
 
-               
+
 
                 </article>
 
@@ -718,7 +853,7 @@
                         Annual plan: ₹4,560
                     </p>
 
-             
+
 
                 </article>
 
@@ -1000,6 +1135,44 @@
     </div>
 
 </footer>
+
+
+<!-- TOMORROW PAGE LOADER CONTROL -->
+<script>
+(function () {
+    const loader = document.getElementById("tomorrow-loader");
+    if (!loader) return;
+
+    const minimumDisplayTime = 850;
+    const startedAt = Date.now();
+    let hasStartedHiding = false;
+
+    function hideTomorrowLoader() {
+        if (hasStartedHiding) return;
+        hasStartedHiding = true;
+
+        const elapsed = Date.now() - startedAt;
+        const remaining = Math.max(0, minimumDisplayTime - elapsed);
+
+        window.setTimeout(function () {
+            loader.classList.add("is-hidden");
+
+            window.setTimeout(function () {
+                loader.remove();
+            }, 700);
+        }, remaining);
+    }
+
+    if (document.readyState === "complete") {
+        hideTomorrowLoader();
+    } else {
+        window.addEventListener("load", hideTomorrowLoader, { once: true });
+    }
+
+    // Prevent the loader from remaining visible if a resource never finishes.
+    window.setTimeout(hideTomorrowLoader, 8000);
+})();
+</script>
 
 
 <!-- JAVASCRIPT -->
