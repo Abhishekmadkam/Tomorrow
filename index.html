@@ -864,6 +864,8 @@
             </div>
 
 
+            <!-- MEMBERSHIP ENQUIRY FORM -->
+
             <form class="contact-form" id="membership-enquiry">
 
                 <div class="form-group">
@@ -892,14 +894,26 @@
 
 
                 <div class="form-group full-width">
+                    <label for="contact-email">Email Address</label>
+                    <input
+                            type="email"
+                            id="contact-email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            autocomplete="email"
+                            required>
+                </div>
+
+
+                <div class="form-group full-width">
                     <label for="contact-plan">Interested Membership</label>
 
                     <select id="contact-plan" name="plan" required>
                         <option value="">Select a plan</option>
-                        <option value="Individual">Individual — ₹99/month</option>
-                        <option value="Family">Family — ₹300/month</option>
-                        <option value="Senior">Senior Wellness — ₹200/month</option>
-                        <option value="Complete Care">Tomorrow Complete Care — ₹400/month</option>
+                        <option value="Individual — ₹99/month">Individual — ₹99/month</option>
+                        <option value="Family — ₹300/month">Family — ₹300/month</option>
+                        <option value="Senior Wellness — ₹200/month">Senior Wellness — ₹200/month</option>
+                        <option value="Tomorrow Complete Care — ₹400/month">Tomorrow Complete Care — ₹400/month</option>
                     </select>
                 </div>
 
@@ -915,7 +929,7 @@
                 </div>
 
 
-                <button type="submit" class="contact-submit">
+                <button type="submit" class="contact-submit" id="contact-submit">
                     Send Membership Enquiry ↗
                 </button>
 
@@ -1010,95 +1024,79 @@
 <script src="./js/navbar.js" defer></script>
 <script src="./js/hero.js" defer></script>
 
-<!-- TOMORROW MEMBERSHIP ENQUIRY EMAIL INTEGRATION -->
+
+<!-- TOMORROW MEMBERSHIP ENQUIRY — MAILTO EMAIL SYSTEM -->
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", function () {
 
         const form = document.getElementById("membership-enquiry");
-        const submitButton = form?.querySelector('button[type="submit"]');
         const statusMessage = document.getElementById("form-status");
 
-        if (!form || !submitButton || !statusMessage) return;
+        if (!form || !statusMessage) {
+            console.error("Tomorrow: Membership form not found.");
+            return;
+        }
 
-        // FormSubmit email endpoint
-        const endpoint = "https://formsubmit.co/ajax/abhishekmadkam01@gmail.com";
+        // Destination email address for all membership enquiries.
+        const destinationEmail = "abhishekmadkam01@gmail.com";
 
-        form.addEventListener("submit", async (event) => {
+        form.addEventListener("submit", function (event) {
 
             event.preventDefault();
 
-            if (!form.reportValidity()) return;
-
-            const originalButtonText = submitButton.textContent.trim();
-
-            submitButton.disabled = true;
-            submitButton.textContent = "Sending Enquiry...";
-
-            statusMessage.textContent =
-                "Please wait while we send your enquiry.";
-
-            statusMessage.style.color = "var(--text-secondary)";
-
-            const formData = new FormData(form);
-            const payload = Object.fromEntries(formData.entries());
-
-            // Email settings
-            payload._subject = "New Tomorrow Membership Enquiry";
-            payload._template = "table";
-
-            try {
-
-                const response = await fetch(endpoint, {
-
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-
-                    body: JSON.stringify(payload)
-
-                });
-
-                const result = await response.json();
-
-                if (
-                    !response.ok ||
-                    result.success === false ||
-                    result.success === "false"
-                ) {
-                    throw new Error(
-                        result.message || "The enquiry could not be sent."
-                    );
-                }
-
-                statusMessage.textContent =
-                    "Thank you! Your membership enquiry has been sent. Our team will contact you soon.";
-
-                statusMessage.style.color = "var(--primary)";
-
-                form.reset();
-
-            } catch (error) {
-
-                console.error(
-                    "Tomorrow membership enquiry error:",
-                    error
-                );
-
-                statusMessage.textContent =
-                    "We couldn't send your enquiry right now. Please try again or contact us directly.";
-
-                statusMessage.style.color = "#B42318";
-
-            } finally {
-
-                submitButton.disabled = false;
-                submitButton.textContent = originalButtonText;
-
+            // Check all required fields.
+            if (!form.reportValidity()) {
+                return;
             }
+
+            // Collect form information.
+            const formData = new FormData(form);
+
+            const name = formData.get("name");
+            const phone = formData.get("phone");
+            const customerEmail = formData.get("email");
+            const plan = formData.get("plan");
+            const message = formData.get("message");
+
+            // Email subject.
+            const subject = "New Tomorrow Membership Enquiry";
+
+            // Email content.
+            const body = [
+                "Hello Tomorrow Team,",
+                "",
+                "I am interested in a Tomorrow membership.",
+                "",
+                "MEMBERSHIP ENQUIRY DETAILS",
+                "",
+                "Full Name: " + name,
+                "Phone Number: " + phone,
+                "Customer Email: " + customerEmail,
+                "Interested Membership: " + plan,
+                "",
+                "Message:",
+                message,
+                "",
+                "--------------------------------",
+                "Sent through the Tomorrow Website",
+                "Stay Healthy. Be Healthy."
+            ].join("\n");
+
+            // Create email link.
+            const mailtoLink =
+                "mailto:" + destinationEmail +
+                "?subject=" + encodeURIComponent(subject) +
+                "&body=" + encodeURIComponent(body);
+
+            // Inform the visitor.
+            statusMessage.textContent =
+                "Opening your email application. Please press Send to submit your enquiry.";
+
+            statusMessage.style.color = "var(--primary)";
+
+            // Open the visitor's default email application.
+            window.location.href = mailtoLink;
 
         });
 
