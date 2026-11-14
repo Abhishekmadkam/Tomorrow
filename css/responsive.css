@@ -571,6 +571,67 @@ code {
 }
 
 
+
+/* =====================================================
+   MOBILE HORIZONTAL OVERFLOW FIX
+===================================================== */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: clip;
+    }
+
+    main,
+    header,
+    footer,
+    section {
+        max-width: 100%;
+    }
+
+    .container {
+        width: calc(100% - 32px);
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .page-hero,
+    .hero,
+    .hero-content,
+    .hero-inner {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .card {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    img,
+    video,
+    iframe {
+        max-width: 100%;
+    }
+
+}
+
+
 /* =========================================================
    END — TOMORROW RESPONSIVE SYSTEM
 ========================================================= */
