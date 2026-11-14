@@ -1,18 +1,50 @@
 
 /* ========================================
-   LAYOUT — MODERN WELLNESS
+   TOMORROW — RESPONSIVE LAYOUT SYSTEM
+======================================== */
+
+/* GLOBAL BOX SIZING */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+body {
+    width: 100%;
+    min-width: 320px;
+    margin: 0;
+    overflow-x: clip;
+}
+
+/* ========================================
+   CONTAINER
 ======================================== */
 
 .container {
-    width: min(100% - 40px, var(--container-width));
+    width: calc(100% - 40px);
+    max-width: var(--container-width, 1440px);
     margin-inline: auto;
 }
 
+/* ========================================
+   SECTIONS
+======================================== */
+
 .section {
-    padding-block: 80px;
+    width: 100%;
+    padding-block: clamp(56px, 7vw, 100px);
 }
 
 .section-header {
+    width: 100%;
     max-width: 650px;
     margin: 0 auto 48px;
     text-align: center;
@@ -24,6 +56,7 @@
     line-height: 1.2;
     font-weight: 700;
     color: var(--ink);
+    text-wrap: balance;
 }
 
 .section-description {
@@ -32,9 +65,15 @@
     line-height: 1.8;
 }
 
+/* ========================================
+   GRID SYSTEM
+======================================== */
+
 .grid {
     display: grid;
-    gap: 24px;
+    width: 100%;
+    min-width: 0;
+    gap: clamp(16px, 2vw, 24px);
 }
 
 .grid-2 {
@@ -45,21 +84,112 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* ========================================
+   FLEX SYSTEM
+======================================== */
+
 .flex-between {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
 }
 
-/* RESPONSIVE */
+/* ========================================
+   LAPTOP
+======================================== */
 
-@media (max-width: 700px) {
-    .grid-2,
+@media (max-width: 1199px) {
+
+    .container {
+        width: calc(100% - 48px);
+    }
+
+    .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .grid-3 {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 768px) {
+
+    .container {
+        width: calc(100% - 36px);
     }
 
     .section {
         padding-block: 60px;
     }
+
+    .section-header {
+        margin-bottom: 32px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .flex-between {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+
+    .container {
+        width: calc(100% - 32px);
+    }
+
+    .section {
+        padding-block: 48px;
+    }
+
+    .section-header {
+        margin-bottom: 26px;
+    }
+
+    .section-title {
+        font-size: clamp(27px, 7vw, 34px);
+    }
+
+    .section-description {
+        font-size: 14px;
+    }
+
+}
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 360px) {
+
+    .container {
+        width: calc(100% - 24px);
+    }
+
+    .section {
+        padding-block: 40px;
+    }
+
 }
