@@ -1,0 +1,116 @@
+
+/* ========================================
+   RESPONSIVE SYSTEM — MODERN WELLNESS
+======================================== */
+
+/* TABLETS */
+
+@media (max-width: 992px) {
+
+    .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .section {
+        padding-block: 64px;
+    }
+
+    .container {
+        width: min(100% - 36px, var(--container-width));
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .container {
+        width: min(100% - 32px, var(--container-width));
+    }
+
+    .grid-2,
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding-block: 52px;
+    }
+
+    .section-header {
+        margin-bottom: 32px;
+    }
+
+    .section-title {
+        font-size: clamp(27px, 7vw, 38px);
+    }
+
+    .section-description {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .flex-between {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .card {
+        border-radius: var(--radius-lg);
+    }
+
+    .btn {
+        max-width: 100%;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 480px) {
+
+    .container {
+        width: min(100% - 28px, var(--container-width));
+    }
+
+    .btn {
+        padding: 11px 20px;
+        font-size: 13px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .section {
+        padding-block: 44px;
+    }
+
+    .section-header {
+        margin-bottom: 26px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .section-description {
+        font-size: 14px;
+    }
+}
+
+/* EXTRA SMALL SCREENS */
+
+@media (max-width: 360px) {
+
+    .container {
+        width: calc(100% - 24px);
+    }
+
+    .btn {
+        padding: 10px 16px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+}

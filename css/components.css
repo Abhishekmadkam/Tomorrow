@@ -1,0 +1,75 @@
+
+/* ========================================
+   BUTTONS — MODERN WELLNESS
+======================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 25px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-outline {
+    border-color: var(--border-color);
+    background: transparent;
+    color: var(--ink);
+}
+
+.btn-outline:hover {
+    border-color: var(--primary);
+    background: var(--secondary);
+    color: var(--ink);
+}
+
+/* ========================================
+   CARDS — MODERN WELLNESS
+======================================== */
+
+.card {
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.card-description {
+    margin-top: 12px;
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+    line-height: 1.8;
+}

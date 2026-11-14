@@ -1,0 +1,65 @@
+
+/* ========================================
+   LAYOUT — MODERN WELLNESS
+======================================== */
+
+.container {
+    width: min(100% - 40px, var(--container-width));
+    margin-inline: auto;
+}
+
+.section {
+    padding-block: 80px;
+}
+
+.section-header {
+    max-width: 650px;
+    margin: 0 auto 48px;
+    text-align: center;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.section-description {
+    margin-top: 16px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.grid {
+    display: grid;
+    gap: 24px;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+    .grid-2,
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding-block: 60px;
+    }
+}

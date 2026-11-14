@@ -1,0 +1,180 @@
+
+/* ========================================
+   FOOTER — MODERN WELLNESS
+======================================== */
+
+.site-footer {
+    background: var(--ink);
+    color: var(--white);
+    padding: 90px 6% 25px;
+    border-top: 1px solid rgba(255, 255, 255, .12);
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 50px;
+    padding-bottom: 75px;
+}
+
+.footer-brand {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.footer-brand span {
+    color: #B9DCC7;
+}
+
+.footer-tagline {
+    max-width: 300px;
+    margin-top: 20px;
+    color: #C1D0C9;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.footer-column h3 {
+    margin-bottom: 22px;
+    color: var(--secondary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    list-style: none;
+}
+
+.footer-links a {
+    width: fit-content;
+    color: #D1DDD6;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--secondary);
+    transform: translateX(5px);
+}
+
+/* FOOTER LARGE TEXT */
+
+.footer-big-text {
+    padding: 35px 0;
+    border-top: 1px solid rgba(255, 255, 255, .2);
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 9vw, 9rem);
+    font-weight: 800;
+    line-height: .95;
+    letter-spacing: -5px;
+    text-transform: uppercase;
+}
+
+.footer-big-text span {
+    color: var(--secondary);
+}
+
+/* FOOTER BOTTOM */
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding-top: 25px;
+    color: #B1C2B8;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-socials a {
+    color: #D1DDD6;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.footer-socials a:hover {
+    color: var(--secondary);
+}
+
+.back-to-top {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.back-to-top:hover {
+    color: var(--white);
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 750px) {
+
+    .site-footer {
+        padding: 70px 5% 25px;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 20px;
+    }
+
+    .footer-brand-column {
+        grid-column: 1 / -1;
+    }
+
+    .footer-brand {
+        font-size: 35px;
+    }
+
+    .footer-big-text {
+        font-size: clamp(2.8rem, 10vw, 5rem);
+        letter-spacing: -3px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .footer-main {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-brand-column {
+        grid-column: auto;
+    }
+
+    .footer-big-text {
+        font-size: 2.6rem;
+        letter-spacing: -2px;
+    }
+}

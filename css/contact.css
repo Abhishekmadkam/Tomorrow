@@ -1,0 +1,209 @@
+
+/* ========================================
+   CONTACT — MODERN WELLNESS
+======================================== */
+
+.contact-section {
+    padding: 120px 6%;
+    background: var(--ink);
+    color: var(--white);
+    overflow: hidden;
+}
+
+.contact-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 65px;
+}
+
+.contact-eyebrow {
+    color: var(--secondary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.contact-symbol {
+    width: 75px;
+    height: 75px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--secondary);
+    border-radius: 50%;
+    color: var(--secondary);
+    font-size: 35px;
+}
+
+.contact-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 700;
+    line-height: .95;
+    letter-spacing: -5px;
+    text-transform: none;
+}
+
+.contact-heading span {
+    color: var(--secondary);
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 70px;
+    margin-top: 90px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,.2);
+}
+
+.contact-copy h3 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.contact-copy p {
+    max-width: 360px;
+    color: #C1D0C9;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.contact-details {
+    margin-top: 45px;
+}
+
+.contact-details a {
+    display: block;
+    width: fit-content;
+    margin-top: 15px;
+    color: var(--secondary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.contact-details a:hover {
+    color: var(--white);
+}
+
+/* FORM */
+
+.contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    color: #E0EAE4;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 16px;
+    background: rgba(255,255,255,.07);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,.2);
+    outline: none;
+    font: inherit;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #A9BBB2;
+}
+
+.form-group select option {
+    background: var(--ink);
+    color: var(--white);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--secondary);
+    background: rgba(255,255,255,.11);
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.contact-submit {
+    grid-column: 1 / -1;
+    width: fit-content;
+    padding: 17px 28px;
+    border: 1px solid var(--secondary);
+    border-radius: var(--radius-full);
+    background: var(--secondary);
+    color: var(--ink);
+    font-family: var(--font-primary);
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.contact-submit:hover {
+    background: var(--white);
+    border-color: var(--white);
+    transform: translateY(-3px);
+}
+
+.form-status {
+    grid-column: 1 / -1;
+    color: var(--secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 750px) {
+    .contact-section {
+        padding: 85px 5%;
+    }
+
+    .contact-heading {
+        font-size: clamp(3rem, 12vw, 5rem);
+        letter-spacing: -2px;
+    }
+
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 45px;
+        margin-top: 60px;
+    }
+
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width,
+    .contact-submit,
+    .form-status {
+        grid-column: 1;
+    }
+}
