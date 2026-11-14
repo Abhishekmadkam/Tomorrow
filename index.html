@@ -873,6 +873,7 @@
                             id="contact-name"
                             name="name"
                             placeholder="Enter your name"
+                            autocomplete="name"
                             required>
                 </div>
 
@@ -885,6 +886,7 @@
                             name="phone"
                             placeholder="Enter your phone number"
                             pattern="[0-9+\-\s]{10,15}"
+                            autocomplete="tel"
                             required>
                 </div>
 
@@ -1008,28 +1010,97 @@
 <script src="./js/navbar.js" defer></script>
 <script src="./js/hero.js" defer></script>
 
+<!-- TOMORROW MEMBERSHIP ENQUIRY EMAIL INTEGRATION -->
+
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", () => {
 
-        // Membership enquiry form.
-        const membershipForm = document.getElementById("membership-enquiry");
+        const form = document.getElementById("membership-enquiry");
+        const submitButton = form?.querySelector('button[type="submit"]');
+        const statusMessage = document.getElementById("form-status");
 
-        if (membershipForm) {
+        if (!form || !submitButton || !statusMessage) return;
 
-            membershipForm.addEventListener("submit", function (event) {
+        // FormSubmit email endpoint
+        const endpoint = "https://formsubmit.co/ajax/abhishekmadkam01@gmail.com";
 
-                event.preventDefault();
+        form.addEventListener("submit", async (event) => {
 
-                const status = document.getElementById("form-status");
+            event.preventDefault();
 
-                status.textContent =
-                    "The membership form is ready, but online submission is not connected yet. Please connect a backend or form service.";
+            if (!form.reportValidity()) return;
 
-                status.style.color = "var(--primary)";
+            const originalButtonText = submitButton.textContent.trim();
 
-            });
+            submitButton.disabled = true;
+            submitButton.textContent = "Sending Enquiry...";
 
-        }
+            statusMessage.textContent =
+                "Please wait while we send your enquiry.";
+
+            statusMessage.style.color = "var(--text-secondary)";
+
+            const formData = new FormData(form);
+            const payload = Object.fromEntries(formData.entries());
+
+            // Email settings
+            payload._subject = "New Tomorrow Membership Enquiry";
+            payload._template = "table";
+
+            try {
+
+                const response = await fetch(endpoint, {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+
+                    body: JSON.stringify(payload)
+
+                });
+
+                const result = await response.json();
+
+                if (
+                    !response.ok ||
+                    result.success === false ||
+                    result.success === "false"
+                ) {
+                    throw new Error(
+                        result.message || "The enquiry could not be sent."
+                    );
+                }
+
+                statusMessage.textContent =
+                    "Thank you! Your membership enquiry has been sent. Our team will contact you soon.";
+
+                statusMessage.style.color = "var(--primary)";
+
+                form.reset();
+
+            } catch (error) {
+
+                console.error(
+                    "Tomorrow membership enquiry error:",
+                    error
+                );
+
+                statusMessage.textContent =
+                    "We couldn't send your enquiry right now. Please try again or contact us directly.";
+
+                statusMessage.style.color = "#B42318";
+
+            } finally {
+
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+
+            }
+
+        });
 
     });
 </script>
